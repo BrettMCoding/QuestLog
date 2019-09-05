@@ -55,6 +55,7 @@ function renderTodoList() {
 
 function dataObjectUpdated() {
   localStorage.setItem('todoList', JSON.stringify(data));
+  console.log(localStorage.getItem('todoList'))
 }
 
 function removeItem() {
@@ -134,6 +135,41 @@ let completed = document.getElementById('completed');
 
 let sortabletoDo = new Sortable(todo, {
   animation: 150,
-  ghostClass: 'ghost'
+  onEnd: function (e) {dataObjectUpdated()},
+  store: {
+		/**
+		 * Get the order of elements. Called once during initialization.
+		 * @param   {Sortable}  sortable
+		 * @returns {Array}
+		 */
+		get: function (sortable) {
+			var order = localStorage.getItem(sortable.options.group.name);
+			return order ? order.split('|') : [];
+		},
+
+		/**
+		 * Save the order of elements. Called onEnd (when the item is dropped).
+		 * @param {Sortable}  sortable
+		 */
+		set: function (sortable) {
+			var order = sortable.toArray();
+			localStorage.setItem(sortable.options.group.name, order.join('|'));
+		}
+	}
 });
-let sortableCompleted = Sortable.create(completed);
+let sortableCompleted = new Sortable(completed, {
+  animation: 150,
+  onUpdate: function (e) {dataObjectUpdated()},
+  store: {
+
+		get: function (sortable) {
+			var order = localStorage.getItem(sortable.options.group.name);
+			return order ? order.split('|') : [];
+		},
+
+		set: function (sortable) {
+			var order = sortable.toArray();
+			localStorage.setItem(sortable.options.group.name, order.join('|'));
+    }
+  }
+});
