@@ -127,3 +127,13 @@ function addItemToDOM(text, completed) {
 
   list.insertBefore(item, list.childNodes[0]);
 }
+
+//SortableJS list sorting code
+let todo = document.getElementById('todo');
+let completed = document.getElementById('completed');
+
+let sortabletoDo = new Sortable(todo, {
+  animation: 150,
+  ghostClass: 'ghost'
+});
+let sortableCompleted = Sortable.create(completed);
