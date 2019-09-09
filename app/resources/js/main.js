@@ -105,24 +105,27 @@ function removeItem() {
   let no = document.createElement('button');
   no.classList.add("no");
 
-  var clickedListItem = (this.parentNode.parentNode);
+  var clickedListItem = (this);
 
   yes.addEventListener('click', function e() {
-    var item = this.parentNode.parentNode;
+    var item = clickedListItem.parentNode.parentNode;
     var parent = item.parentNode;
     var id = parent.id;
     var value = item.innerText;
 
     if (id === 'todo') {
       data.todo.splice(data.todo.indexOf(value), 1);
+      console.log("shoulda worked");
     } else {
       data.completed.splice(data.completed.indexOf(value), 1);
+      console.log("registered as completed");
     }
-    dataObjectUpdated();
 
-    clickedListItem.remove();
+    item.remove();
     $('.bgBlock').remove();
     $('.popup').remove();
+
+    dataObjectUpdated();
 
     if (audioOn) {
       audioClick.play();
@@ -151,8 +154,10 @@ function removeItemTrue() {
 
   if (id === 'todo') {
     data.todo.splice(data.todo.indexOf(value), 1);
+    console.log("shoulda worked");
   } else {
     data.completed.splice(data.completed.indexOf(value), 1);
+    console.log("registered as completed");
   }
   dataObjectUpdated();
 

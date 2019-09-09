@@ -364,6 +364,14 @@ ul.todo#completed:after {
   background-color: rgba(255, 255, 255, 0)
 }
 
+.yes:hover{
+  background-image: url('../assets/yes_clicked.png');
+}
+
+.no:hover{
+  background-image: url('../assets/no_clicked.png');
+}
+
 .no{
   background-image: url('../assets/no.png');
   width:104px;
