@@ -1,8 +1,10 @@
 // TODO: Are you sure you want to abandon this quest?
 // TODO: subcategories?
 // TODO: login / save mechanism
-// TODO: turn off sound button
 // TODO: random xp
+// TODO: REMOVE ITEM CODE IS BROKEN
+//       FIGURE OUT HOW TO ADD POP UPS AND BUTTONS TO A NEW ELEMENT
+//       AND THEN ADJUST REMOVEITEM FUNCTIONS TO BE CLEANER
 
 let data = (localStorage.getItem('todoList')) ? JSON.parse                      (localStorage.getItem('todoList')) : {
       todo: [],
@@ -25,10 +27,8 @@ audioCheckBoxElement.addEventListener('change', toggleAudio);
 
 function toggleAudio() {
   if (audioCheck.checked == true) {
-    console.log("CHECKED IS TRUE");
     audioOn = true;
   } else {
-    console.log("CHECKED IS FALSE");
     audioOn = false;
   }
 }
@@ -87,7 +87,63 @@ function dataObjectUpdated() {
 }
 
 function removeItem() {
+  let body = document.getElementById("main");
+  let buttons = document.createElement('div');
+  buttons.classList.add('buttons');
 
+  let popUpBox = document.createElement('popupbox');
+  popUpBox.classList.add("popup");
+
+  let bgBlock = document.createElement('bgBlock');
+  bgBlock.classList.add("bgBlock");
+
+  popUpBox.innerText = "Are you sure you want to abandon this quest?";
+
+  let yes = document.createElement('button');
+  yes.classList.add("yes");
+
+  let no = document.createElement('button');
+  no.classList.add("no");
+
+  var clickedListItem = (this.parentNode.parentNode);
+
+  yes.addEventListener('click', function e() {
+    var item = this.parentNode.parentNode;
+    var parent = item.parentNode;
+    var id = parent.id;
+    var value = item.innerText;
+
+    if (id === 'todo') {
+      data.todo.splice(data.todo.indexOf(value), 1);
+    } else {
+      data.completed.splice(data.completed.indexOf(value), 1);
+    }
+    dataObjectUpdated();
+
+    clickedListItem.remove();
+    $('.bgBlock').remove();
+    $('.popup').remove();
+
+    if (audioOn) {
+      audioClick.play();
+      audioQuestAbandon.play();
+    }
+  });
+  no.addEventListener('click', removeItemFalse);
+
+  buttons.appendChild(yes);
+  buttons.appendChild(no);
+  popUpBox.appendChild(buttons);
+
+  body.appendChild(popUpBox);
+  body.appendChild(bgBlock);
+
+  if (audioOn) {
+    audioClick.play();
+  }
+}
+
+function removeItemTrue() {
   var item = this.parentNode.parentNode;
   var parent = item.parentNode;
   var id = parent.id;
@@ -100,11 +156,21 @@ function removeItem() {
   }
   dataObjectUpdated();
 
-  parent.removeChild(item);
+  $('.bgBlock').remove();
+  $('.popup').remove();
 
   if (audioOn) {
     audioClick.play();
     audioQuestAbandon.play();
+  }
+}
+
+function removeItemFalse() {
+  $('.bgBlock').remove();
+  $('.popup').remove();
+
+  if (audioOn) {
+    audioClick.play();
   }
 }
 
