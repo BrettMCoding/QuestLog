@@ -333,3 +333,26 @@ ul.todo#completed:after {
     background-image: url('../assets/no_clicked.png');
   }
 }
+
+/* on-click for mobile users */
+ul.todo#completed li .buttons button.remove:active {
+  background-image: url('../assets/abandon_clicked.png');
+}
+ul.todo#completed li .buttons button.complete:active {
+  background-image: url('../assets/complete_clicked.png');
+}
+ul.todo li .buttons button.complete:active {
+  background-image: url('../assets/complete_clicked.png');
+}
+header button:active {
+  background-image: url('../assets/accept_clicked.png');
+}
+ul.todo li .buttons button.remove:active {
+  background-image: url('../assets/abandon_clicked.png');
+}
+.yes:active{
+  background-image: url('../assets/yes_clicked.png');
+}
+.no:active{
+  background-image: url('../assets/no_clicked.png');
+}
