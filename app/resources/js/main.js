@@ -11,10 +11,10 @@ let data = (localStorage.getItem('todoList')) ? JSON.parse                      
 let audioOn = true;
 let audioCheck = document.getElementById("audiocheckbox");
 
-let audioClick = new Audio("../app/resources/assets/sfx/click.mp3");
-let audioQuestComplete = new Audio("../app/resources/assets/sfx/questcomplete.mp3");
-let audioQuestAdded = new Audio("../app/resources/assets/sfx/questadded.mp3");
-let audioQuestAbandon = new Audio("../app/resources/assets/sfx/questabandoned.mp3");
+let audioClick = new Audio("app/resources/assets/sfx/click.mp3");
+let audioQuestComplete = new Audio("app/resources/assets/sfx/questcomplete.mp3");
+let audioQuestAdded = new Audio("app/resources/assets/sfx/questadded.mp3");
+let audioQuestAbandon = new Audio("app/resources/assets/sfx/questabandoned.mp3");
 
 let audioCheckBoxElement = document.getElementById("audiocheckbox");
 audioCheckBoxElement.addEventListener('change', toggleAudio);
