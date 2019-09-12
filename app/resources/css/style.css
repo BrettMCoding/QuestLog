@@ -114,10 +114,6 @@ header button {
   background-color: rgba(255, 255, 255, 0)
 }
 
-header button:hover {
-  background-image: url('../assets/accept_clicked.png');
-}
-
 .container {
   width: 100%;
   float:left;
@@ -193,16 +189,8 @@ ul.todo li .buttons button.remove {
   left: 0px;
 }
 
-ul.todo li .buttons button.remove:hover {
-  background-image: url('../assets/abandon_clicked.png');
-}
-
 ul.todo li .buttons button.complete {
   background-image: url('../assets/complete.png');
-}
-
-ul.todo li .buttons button.complete:hover {
-  background-image: url('../assets/complete_clicked.png');
 }
 
 ul.todo#completed{
@@ -221,15 +209,6 @@ ul.todo#completed .buttons button.complete {
 
 ul.todo#completed .buttons button.remove {
   background-image: url('../assets/abandon_grey.png');
-}
-
-ul.todo#completed li .buttons button.remove:hover {
-  background-image: url('../assets/abandon_clicked.png');
-}
-
-
-ul.todo#completed li .buttons button.complete:hover {
-  background-image: url('../assets/complete_clicked.png');
 }
 
 ul.todo#completed:before {
@@ -279,10 +258,6 @@ ul.todo#completed:after {
   background-color: rgba(255, 255, 255, 0)
 }
 
-.yes:hover{
-  background-image: url('../assets/yes_clicked.png');
-}
-
 .no{
   background-image: url('../assets/no.png');
   width:104px;
@@ -296,10 +271,6 @@ ul.todo#completed:after {
   background-position: 0px center;
   border: none;
   background-color: rgba(255, 255, 255, 0)
-}
-
-.no:hover{
-  background-image: url('../assets/no_clicked.png');
 }
 
 .popup{
@@ -334,8 +305,31 @@ ul.todo#completed:after {
 
 /* Media Queries */
 @media(max-width: 500px){
-  header {}
   ul.todo li {
     flex-direction: column;
+  }
+}
+
+@media(hover: hover) and (pointer: fine) {
+  ul.todo#completed li .buttons button.remove:hover {
+    background-image: url('../assets/abandon_clicked.png');
+  }
+  ul.todo#completed li .buttons button.complete:hover {
+    background-image: url('../assets/complete_clicked.png');
+  }
+  ul.todo li .buttons button.complete:hover {
+    background-image: url('../assets/complete_clicked.png');
+  }
+  header button:hover {
+    background-image: url('../assets/accept_clicked.png');
+  }
+  ul.todo li .buttons button.remove:hover {
+    background-image: url('../assets/abandon_clicked.png');
+  }
+  .yes:hover{
+    background-image: url('../assets/yes_clicked.png');
+  }
+  .no:hover{
+    background-image: url('../assets/no_clicked.png');
   }
 }

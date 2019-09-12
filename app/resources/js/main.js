@@ -2,6 +2,8 @@
 // TODO: login / save mechanism
 // TODO: random xp
 // TODO: Max-width option button?
+// TODO: Fix reordering
+// TODO: fix sticky hover on mobile
 
 let data = (localStorage.getItem('todoList')) ? JSON.parse                      (localStorage.getItem('todoList')) : {
       todo: [],
