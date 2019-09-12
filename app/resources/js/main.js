@@ -1,17 +1,12 @@
-// TODO: Are you sure you want to abandon this quest?
 // TODO: subcategories?
 // TODO: login / save mechanism
 // TODO: random xp
-// TODO: REMOVE ITEM CODE IS BROKEN
-//       FIGURE OUT HOW TO ADD POP UPS AND BUTTONS TO A NEW ELEMENT
-//       AND THEN ADJUST REMOVEITEM FUNCTIONS TO BE CLEANER
+// TODO: Max-width option button?
 
 let data = (localStorage.getItem('todoList')) ? JSON.parse                      (localStorage.getItem('todoList')) : {
       todo: [],
       completed: []
 };
-
-console.log(JSON.parse(localStorage.getItem('todoList')));
 
 let audioOn = true;
 let audioCheck = document.getElementById("audiocheckbox");
@@ -83,9 +78,9 @@ function renderTodoList() {
 
 function dataObjectUpdated() {
   localStorage.setItem('todoList', JSON.stringify(data));
-  console.log(localStorage.getItem('todoList'))
 }
 
+// Create a pop-up "are you sure" box with yes/no buttons, as well as a bg blocking element. Then either delete the object, or close the box
 function removeItem() {
   let body = document.getElementById("main");
   let buttons = document.createElement('div');
@@ -115,10 +110,8 @@ function removeItem() {
 
     if (id === 'todo') {
       data.todo.splice(data.todo.indexOf(value), 1);
-      console.log("shoulda worked");
     } else {
       data.completed.splice(data.completed.indexOf(value), 1);
-      console.log("registered as completed");
     }
 
     item.remove();
@@ -132,7 +125,15 @@ function removeItem() {
       audioQuestAbandon.play();
     }
   });
-  no.addEventListener('click', removeItemFalse);
+
+  no.addEventListener('click', function e() {
+    $('.bgBlock').remove();
+    $('.popup').remove();
+  
+    if (audioOn) {
+      audioClick.play();
+    }
+  });
 
   buttons.appendChild(yes);
   buttons.appendChild(no);
@@ -140,39 +141,6 @@ function removeItem() {
 
   body.appendChild(popUpBox);
   body.appendChild(bgBlock);
-
-  if (audioOn) {
-    audioClick.play();
-  }
-}
-
-function removeItemTrue() {
-  var item = this.parentNode.parentNode;
-  var parent = item.parentNode;
-  var id = parent.id;
-  var value = item.innerText;
-
-  if (id === 'todo') {
-    data.todo.splice(data.todo.indexOf(value), 1);
-    console.log("shoulda worked");
-  } else {
-    data.completed.splice(data.completed.indexOf(value), 1);
-    console.log("registered as completed");
-  }
-  dataObjectUpdated();
-
-  $('.bgBlock').remove();
-  $('.popup').remove();
-
-  if (audioOn) {
-    audioClick.play();
-    audioQuestAbandon.play();
-  }
-}
-
-function removeItemFalse() {
-  $('.bgBlock').remove();
-  $('.popup').remove();
 
   if (audioOn) {
     audioClick.play();
@@ -211,27 +179,30 @@ function addItemToDOM(text, completed) {
   let list = (completed) ? document.getElementById('completed'):document.getElementById('todo');
 
   let item = document.createElement('li');
-  item.innerText = text;
+  // item.innerText = "fuck";
+
+  let innerItem = document.createElement('div');
+  innerItem.classList.add('textbox');
+  innerItem.innerText = text;
 
   let buttons = document.createElement('div');
   buttons.classList.add('buttons');
 
   let remove = document.createElement('button');
-  remove.classList.add('remove')
-  //remove.innerHTML = removePNGbtn;
+  remove.classList.add('remove');
 
   // Add click event for removing item
   remove.addEventListener('click', removeItem);
   
   let complete = document.createElement('button');
   complete.classList.add('complete')
-  //complete.innerHTML = completeSVG;
 
   // Add click event for completing the item
   complete.addEventListener('click', completeItem);
 
   buttons.appendChild(remove);
   buttons.appendChild(complete);
+  item.appendChild(innerItem);
   item.appendChild(buttons);
 
   list.insertBefore(item, list.childNodes[0]);

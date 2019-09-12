@@ -21,9 +21,11 @@ body, input, button {
 }
 
 header {
+  display: inline-flex;
+  flex-direction: column;
   width:100%;
   height: 125px;
-  position:fixed;
+  position: fixed;
   padding:15px;
   top:0;
   left:0;
@@ -40,10 +42,7 @@ header h1 {
   text-shadow:2px 2px 1px #000000
 }
 
-header label#audioCheck {
-  position: relative;
-  top: -20px;
-  left: 80%;
+header .options {
   color:#e9c02c;
   text-shadow:2px 2px 1px #000000;
 }
@@ -59,7 +58,7 @@ header input#item {
   font-weight: 400;
   text-indent: 18px;
   text-shadow:1px 1px 1px #000000;
-  padding: 0 60px 0 0;
+  padding: 0 130px 0 0;
   
 
   background:rgba(255,255,255,0.2);
@@ -106,11 +105,6 @@ header button {
   position:absolute;
   top:81px;
   right:30px;
-  /* z-index:2;
-  border-radius:25px;
-  background:#fff;
-  box-shadow:none;
-  outline:none; */
   cursor: pointer;
   
   background-image: url('../assets/accept.png');
@@ -124,24 +118,15 @@ header button:hover {
   background-image: url('../assets/accept_clicked.png');
 }
 
-/* header button svg {
-  width: 16px;
-  height: 16px;
-  position:absolute;
-  top:50%;
-  left:50%;
-  margin:-8px 0 0 -8px;
-}
-
-header button svg .fill {
-  fill:#25b99a;
-} */
-
 .container {
   width: 100%;
   float:left;
   padding:15px;
 }
+
+/* ul {
+  word-wrap: break-word;
+} */
 
 ul.todo {
   width:100%;
@@ -149,21 +134,35 @@ ul.todo {
 }
 
 ul.todo li {
+  display: inline-flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  align-items: center;
+
+  word-wrap: break-all;
+  overflow-wrap: break-word;
   width: 100%;
-  height:30px;
+  min-height:30px;
+  max-height: 250px;
   float:left;
   font-size:14px;
   font-weight:500;
   color:#ffc700;
   line-height:2px;
+  line-height: 15px;
   text-shadow:1px 1px 1px #000000;
-
   background:#3c332f;
   border-radius:5px;
   position: relative;
   box-shadow: 0px 1px 2px rgba(44,62,80,0.10);
   margin:0 0 10px 0;
-  padding:14px 100px 14px 14px;
+  padding:0px 14px 0px 14px;
+}
+
+ul.todo .textbox {
+  width: 100%;
+  min-width: 200px;
 }
 
 ul.todo li:last-of-type {
@@ -171,53 +170,16 @@ ul.todo li:last-of-type {
 }
 
 ul.todo li .buttons {
-  width:208px;
-  height:25px;
-  position: absolute;
-  padding-left:110px;
-  top:2px;
-  right: 22px;
+  display: inline-flex;
+  flex-direction: row;
+  margin-left: 5px;
 }
 
-/* outdated button general code. duplicate class code? */
-/* ul.todo li .buttons button {
-  width:50px;
-  height:30px;
-  float:left;
-  border: 0px;
-  background: none;
-  box-shadow: none;
-  outline: none;
-  position:relative;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance:none;
-  appearance: none;
-} */
-
-/* dashes between buttons */
-/* ul.todo li .buttons button:last-of-type:before {
-  content:'';
-  width:1px;
-  height:20px;
-  position:absolute;
-  top:5px;
-  left:0;
-  background:#edf0f1;
-} */
-
 ul.todo li .buttons button{
-  /* width:202px;
-  height:22px; */
   width:104px;
   height:26px;
-  position: absolute;
-  /* top:50%;
-  left:50%;
-  margin:-11px 0 0 -11px; */
+  margin: 5px;
+  /* position: absolute; */
   cursor: pointer;
 
   background-repeat: no-repeat;
@@ -226,40 +188,6 @@ ul.todo li .buttons button{
   background-color: rgba(255, 255, 255, 0)
 }
 
-/* ul.todo li .buttons button svg .fill {
-  -webkit-transition: fill 0.2s ease;
-  -moz-transition: fill 0.2s ease;
-  -ms-transition: fill 0.2s ease;
-  -o-transition: fill 0.2s ease;
-  transition: fill 0.2s ease;
-}
-
-ul.todo li .buttons button.complete svg {
-  border-radius: 11px;
-  border:1.5px solid #25b99a;
-
-  -webkit-transition: background 0.2s ease;
-  -moz-transition: background 0.2s ease;
-  -ms-transition: background 0.2s ease;
-  -o-transition: background 0.2s ease;
-  transition:background 0.2s ease;
-} */
-
-ul.todo#completed li .buttons button.complete svg {
-  background: #25b99a;
-  border: 0px;
-}
-
-ul.todo:not(#completed) li .buttons button.complete:hover svg {
-  background:rgba(37,185,154,0.75);
-}
-
-ul.todo:not(#completed) li .buttons button.complete:hover svg .fill {
-  fill:#fff;
-}
-
-
-/* was ul.todo li .buttons button.remove svg */
 ul.todo li .buttons button.remove {
   background-image: url('../assets/abandon.png');
   left: 0px;
@@ -269,17 +197,6 @@ ul.todo li .buttons button.remove:hover {
   background-image: url('../assets/abandon_clicked.png');
 }
 
-/* ul.todo li .buttons button.remove svg {
-  fill:#c0cecb;
-} */
-
-ul.todo li .buttons button.remove:hover svg {
-  fill:red;
-}
-
-/* was ul.todo li .buttons button.complete svg {
-  fill:#25b99a;
-}*/
 ul.todo li .buttons button.complete {
   background-image: url('../assets/complete.png');
 }
@@ -347,8 +264,6 @@ ul.todo#completed:after {
   color: #aaa;
 }
 
-
-
 .yes{
   background-image: url('../assets/yes.png');
   width:104px;
@@ -368,10 +283,6 @@ ul.todo#completed:after {
   background-image: url('../assets/yes_clicked.png');
 }
 
-.no:hover{
-  background-image: url('../assets/no_clicked.png');
-}
-
 .no{
   background-image: url('../assets/no.png');
   width:104px;
@@ -387,7 +298,10 @@ ul.todo#completed:after {
   background-color: rgba(255, 255, 255, 0)
 }
 
-/* possible code for centering a pop-up */
+.no:hover{
+  background-image: url('../assets/no_clicked.png');
+}
+
 .popup{
   width: 500px;
   height: 100px;
@@ -406,7 +320,6 @@ ul.todo#completed:after {
   border-color: #757575;
 
   z-index: 13;
-
 }
 
 .bgBlock {
@@ -417,4 +330,12 @@ ul.todo#completed:after {
   left: 0;
 
   background-color: #00000050;
+}
+
+/* Media Queries */
+@media(max-width: 500px){
+  header {}
+  ul.todo li {
+    flex-direction: column;
+  }
 }
