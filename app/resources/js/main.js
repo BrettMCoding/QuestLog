@@ -2,10 +2,9 @@
 // TODO: login / save mechanism
 // TODO: random xp
 // TODO: Max-width option button?
-// TODO: abandon button instant delete with no sound on complete quest
 // TODO: make return key on mobile keyboard complete item
 // and start a new one
-// TODO: research and fix blurry mobile buttons
+// TODO: change button text or create resized buttons (figure out optimal resize)
 // TODO save sound on/off to local storage
 
 let data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')) : {
@@ -50,7 +49,7 @@ document.getElementById('addItem').addEventListener('click', function() {
 
 document.getElementById('item').addEventListener('keydown', function(e) {
   let value = this.value;
-  if (e.code === 'Enter' && value) {
+  if (e.keyCode === 13 && value) {
     addItem(value);
   }
 });
