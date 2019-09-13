@@ -185,29 +185,29 @@ function completeItem() {
 function addItemToDOM(text, completed) {
   let list = (completed) ? document.getElementById('completed'):document.getElementById('todo');
 
-  let item = document.createElement('li');
+    let item = document.createElement('li');
 
-  let dragHandle = document.createElement('span');
-  dragHandle.classList.add("draghandle");
+    let dragHandle = document.createElement('span');
+    dragHandle.classList.add("draghandle");
 
-  let innerItem = document.createElement('div');
-  innerItem.classList.add('textbox');
-  innerItem.innerText = text;
+    let innerItem = document.createElement('div');
+    innerItem.classList.add('textbox');
+    innerItem.innerText = text;
 
-  let buttons = document.createElement('div');
-  buttons.classList.add('buttons');
+    let buttons = document.createElement('div');
+    buttons.classList.add('buttons');
 
-  let remove = document.createElement('button');
-  remove.classList.add('remove');
+    let remove = document.createElement('button');
+    remove.classList.add('remove');
 
-  // Add click event for removing item
-  remove.addEventListener('click', removeItem);
-  
-  let complete = document.createElement('button');
-  complete.classList.add('complete')
+    // Add click event for removing item
+    remove.addEventListener('click', removeItem);
+    
+    let complete = document.createElement('button');
+    complete.classList.add('complete')
 
-  // Add click event for completing the item
-  complete.addEventListener('click', completeItem);
+    // Add click event for completing the item
+    complete.addEventListener('click', completeItem);
 
   buttons.appendChild(remove);
   buttons.appendChild(complete);
