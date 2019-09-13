@@ -2,10 +2,15 @@
 // TODO: login / save mechanism
 // TODO: random xp
 // TODO: Max-width option button?
-// TODO: Fix reordering
-// TODO: fix sticky hover on mobile
+// TODO: abandon button instant delete with no sound on complete quest
+// TODO: Fix sortable on mobile?
+// TODO: make sortable text selectable
+// TODO: make return key on mobile keyboard complete item
+// and start a new one
+// TODO: research and fix blurry mobile buttons
+// TODO save sound on/off to local storage
 
-let data = (localStorage.getItem('todoList')) ? JSON.parse                      (localStorage.getItem('todoList')) : {
+let data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')) : {
       todo: [],
       completed: []
 };
@@ -181,7 +186,9 @@ function addItemToDOM(text, completed) {
   let list = (completed) ? document.getElementById('completed'):document.getElementById('todo');
 
   let item = document.createElement('li');
-  // item.innerText = "fuck";
+
+  let dragHandle = document.createElement('span');
+  dragHandle.classList.add("draghandle");
 
   let innerItem = document.createElement('div');
   innerItem.classList.add('textbox');
@@ -204,6 +211,7 @@ function addItemToDOM(text, completed) {
 
   buttons.appendChild(remove);
   buttons.appendChild(complete);
+  item.appendChild(dragHandle);
   item.appendChild(innerItem);
   item.appendChild(buttons);
 
@@ -216,6 +224,7 @@ let completed = document.getElementById('completed');
 
 let sortabletoDo = new Sortable(todo, {
   animation: 150,
+  handle: ".draghandle",
   onEnd: function (e) {dataObjectUpdated()},
   store: {
 		/**
@@ -240,6 +249,7 @@ let sortabletoDo = new Sortable(todo, {
 });
 let sortableCompleted = new Sortable(completed, {
   animation: 150,
+  handle: ".draghandle",
   onUpdate: function (e) {dataObjectUpdated()},
   store: {
 
