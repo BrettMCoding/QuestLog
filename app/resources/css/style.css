@@ -164,8 +164,8 @@ ul.todo .draghandle:before {
   align-content: center;
   content: "⁞";
   justify-content: flex-start;
-  font-size:20px;
-  padding: 0 5px 0 6px;
+  font-size:26px;
+  padding: 0 6px 0 8px;
 }
 
 ul.todo .textbox {
