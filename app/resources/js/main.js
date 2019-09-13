@@ -224,7 +224,7 @@ let completed = document.getElementById('completed');
 
 let sortabletoDo = new Sortable(todo, {
   animation: 150,
-  handle: ".draghandle",
+  // handle: ".draghandle",
   onEnd: function (e) {dataObjectUpdated()},
   store: {
 		/**
@@ -249,7 +249,7 @@ let sortabletoDo = new Sortable(todo, {
 });
 let sortableCompleted = new Sortable(completed, {
   animation: 150,
-  handle: ".draghandle",
+  // handle: ".draghandle",
   onUpdate: function (e) {dataObjectUpdated()},
   store: {
 
