@@ -3,8 +3,6 @@
 // TODO: random xp
 // TODO: Max-width option button?
 // TODO: abandon button instant delete with no sound on complete quest
-// TODO: Fix sortable on mobile?
-// TODO: make sortable text selectable
 // TODO: make return key on mobile keyboard complete item
 // and start a new one
 // TODO: research and fix blurry mobile buttons
@@ -88,71 +86,77 @@ function dataObjectUpdated() {
 }
 
 // Create a pop-up "are you sure" box with yes/no buttons, as well as a bg blocking element. Then either delete the object, or close the box
-function removeItem() {
-  let body = document.getElementById("main");
-  let buttons = document.createElement('div');
-  buttons.classList.add('buttons');
-
-  let popUpBox = document.createElement('popupbox');
-  popUpBox.classList.add("popup");
-
-  let bgBlock = document.createElement('bgBlock');
-  bgBlock.classList.add("bgBlock");
-
-  popUpBox.innerText = "Are you sure you want to abandon this quest?";
-
-  let yes = document.createElement('button');
-  yes.classList.add("yes");
-
-  let no = document.createElement('button');
-  no.classList.add("no");
-
+// If abandon button is on a complete quest, instantly abandon with no quest failed sound effect
+function abandonClicked() {
   var clickedListItem = (this);
+  var item = clickedListItem.parentNode.parentNode;
+  var parent = item.parentNode;
+  var id = parent.id;
+  var value = item.innerText;
 
-  yes.addEventListener('click', function e() {
-    var item = clickedListItem.parentNode.parentNode;
-    var parent = item.parentNode;
-    var id = parent.id;
-    var value = item.innerText;
-
-    if (id === 'todo') {
-      data.todo.splice(data.todo.indexOf(value), 1);
-    } else {
-      data.completed.splice(data.completed.indexOf(value), 1);
-    }
-
-    item.remove();
-    $('.bgBlock').remove();
-    $('.popup').remove();
-
-    dataObjectUpdated();
-
+  if (id === 'completed') {
+    data.completed.splice(data.completed.indexOf(value), 1);
     if (audioOn) {
       audioClick.play();
-      audioQuestAbandon.play();
     }
-  });
+    item.remove();
+    dataObjectUpdated();
+  } else {
+    let body = document.getElementById("main");
+    let buttons = document.createElement('div');
+    buttons.classList.add('buttons');
 
-  no.addEventListener('click', function e() {
-    $('.bgBlock').remove();
-    $('.popup').remove();
+    let popUpBox = document.createElement('popupbox');
+    popUpBox.classList.add("popup");
+
+    let bgBlock = document.createElement('bgBlock');
+    bgBlock.classList.add("bgBlock");
+
+    popUpBox.innerText = "Are you sure you want to abandon this quest?";
+
+    let yes = document.createElement('button');
+    yes.classList.add("yes");
+
+    let no = document.createElement('button');
+    no.classList.add("no");
+
+    yes.addEventListener('click', function e() {
+      data.todo.splice(data.todo.indexOf(value), 1);
+
+      item.remove();
+      $('.bgBlock').remove();
+      $('.popup').remove();
+
+      dataObjectUpdated();
+
+      if (audioOn) {
+        audioClick.play();
+        audioQuestAbandon.play();
+      }
+    });
+
+    no.addEventListener('click', function e() {
+      $('.bgBlock').remove();
+      $('.popup').remove();
+    
+      if (audioOn) {
+        audioClick.play();
+      }
+    });
+  
+    buttons.appendChild(yes);
+    buttons.appendChild(no);
+    popUpBox.appendChild(buttons);
+  
+    body.appendChild(popUpBox);
+    body.appendChild(bgBlock);
   
     if (audioOn) {
       audioClick.play();
     }
-  });
-
-  buttons.appendChild(yes);
-  buttons.appendChild(no);
-  popUpBox.appendChild(buttons);
-
-  body.appendChild(popUpBox);
-  body.appendChild(bgBlock);
-
-  if (audioOn) {
-    audioClick.play();
-  }
-}
+  };
+  return;
+};
 
 function completeItem() {
   var item = this.parentNode.parentNode;
@@ -201,7 +205,7 @@ function addItemToDOM(text, completed) {
     remove.classList.add('remove');
 
     // Add click event for removing item
-    remove.addEventListener('click', removeItem);
+    remove.addEventListener('click', abandonClicked);
     
     let complete = document.createElement('button');
     complete.classList.add('complete')
