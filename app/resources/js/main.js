@@ -12,23 +12,25 @@ let data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem(
       completed: []
 };
 
-let audioOn = true;
 let audioCheck = document.getElementById("audiocheckbox");
+
+let savedOptions = JSON.parse(localStorage.getItem('audiocheckbox'));
+  
+audioCheck.checked = savedOptions;
 
 let audioClick = new Audio("app/resources/assets/sfx/click.mp3");
 let audioQuestComplete = new Audio("app/resources/assets/sfx/questcomplete.mp3");
 let audioQuestAdded = new Audio("app/resources/assets/sfx/questadded.mp3");
 let audioQuestAbandon = new Audio("app/resources/assets/sfx/questabandoned.mp3");
 
-let audioCheckBoxElement = document.getElementById("audiocheckbox");
-audioCheckBoxElement.addEventListener('change', toggleAudio);
+audioCheck.addEventListener('change', toggleAudio);
 
 
 function toggleAudio() {
   if (audioCheck.checked == true) {
-    audioOn = true;
+    localStorage.setItem('audiocheckbox', true);
   } else {
-    audioOn = false;
+    localStorage.setItem('audiocheckbox', false);
   }
 }
 
@@ -60,7 +62,7 @@ function addItem(value) {
       
       data.todo.push(value);
       dataObjectUpdated();
-      if (audioOn) {
+      if (audioCheck.checked == true) {
         audioClick.play();
         audioQuestAdded.play();
       }
@@ -95,7 +97,7 @@ function abandonClicked() {
 
   if (id === 'completed') {
     data.completed.splice(data.completed.indexOf(value), 1);
-    if (audioOn) {
+    if (audioCheck.checked == true) {
       audioClick.play();
     }
     item.remove();
@@ -128,7 +130,7 @@ function abandonClicked() {
 
       dataObjectUpdated();
 
-      if (audioOn) {
+      if (audioCheck.checked == true) {
         audioClick.play();
         audioQuestAbandon.play();
       }
@@ -138,7 +140,7 @@ function abandonClicked() {
       $('.bgBlock').remove();
       $('.popup').remove();
     
-      if (audioOn) {
+      if (audioCheck.checked == true) {
         audioClick.play();
       }
     });
@@ -150,7 +152,7 @@ function abandonClicked() {
     body.appendChild(popUpBox);
     body.appendChild(bgBlock);
   
-    if (audioOn) {
+    if (audioCheck.checked == true) {
       audioClick.play();
     }
   };
@@ -179,7 +181,7 @@ function completeItem() {
 
   parent.removeChild(item);
   target.insertBefore(item, target.childNodes[0]);
-  if (audioOn) {
+  if (audioCheck.checked == true) {
     audioClick.play();
     audioQuestComplete.play();
   }
