@@ -2,10 +2,7 @@
 // TODO: login / save mechanism
 // TODO: random xp
 // TODO: Max-width option button?
-// TODO: make return key on mobile keyboard complete item
-// and start a new one
-// TODO: change button text or create resized buttons (figure out optimal resize)
-// TODO save sound on/off to local storage
+// TODO: Refactor duplicate button code
 
 let data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')) : {
       todo: [],
