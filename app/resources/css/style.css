@@ -21,7 +21,7 @@ body, input, button {
 }
 
 header {
-  background-image: url('../assets/ironforge.jpg');
+  background:url('../assets/ironforge.jpg') no-repeat center/cover;
   display: inline-flex;
   flex-direction: column;
   width:100%;
@@ -31,7 +31,7 @@ header {
   top:0;
   left:0;
   z-index:5;
-  background:#3c332f;
+  /* background:#3c332f; */
   box-shadow:0px 2px 4px rgba(44,62,80,0.15);
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
