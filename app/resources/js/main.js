@@ -178,11 +178,37 @@ function completeItem() {
 
   parent.removeChild(item);
   target.insertBefore(item, target.childNodes[0]);
+
   if (audioCheck.checked == true) {
     audioClick.play();
-    audioQuestComplete.play();
+    if (id === 'todo') {
+      audioQuestComplete.play();
+    }
+  }
+
+  if (id === 'todo') {
+    giveXP();
   }
 }
+
+function giveXP() {
+  let expdiv = document.getElementById("expdiv");
+    
+
+    let XP = document.createElement('li');
+    XP.id = ('XP');
+    let val = Math.round(Math.random() * 150000);
+    console.log("XP: " + val.toString());
+    XP.textContent = "XP: " + val.toString();
+
+    expdiv.insertBefore(XP, expdiv.childNodes[0]);
+
+    //Adjust time to animation
+    setTimeout(function(){
+      expdiv.removeChild(XP);
+  }, 5000); 
+};
+
 
 function addItemToDOM(text, completed) {
   let list = (completed) ? document.getElementById('completed'):document.getElementById('todo');

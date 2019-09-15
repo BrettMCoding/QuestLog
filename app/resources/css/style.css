@@ -21,6 +21,7 @@ body, input, button {
 }
 
 header {
+  background-image: url('../assets/ironforge.jpg');
   display: inline-flex;
   flex-direction: column;
   width:100%;
@@ -103,7 +104,7 @@ header button {
   width:104px;
   height:26px;
   position:absolute;
-  top:81px;
+  top:83px;
   right:30px;
   cursor: pointer;
   
@@ -242,12 +243,12 @@ ul.todo#completed:before {
 }
 
 ul.todo#todo:empty:after {
-  content: 'You don\'t have any active tasks';
+  content: 'You don\'t have any active quests';
   margin: 15px 0 0 0;
 }
 
 ul.todo#completed:empty:after { 
-  content: 'You have yet to complete any tasks.';
+  content: 'You have yet to complete any quests.';
 }
 
 ul.todo#todo:after,
@@ -317,6 +318,50 @@ ul.todo#completed:after {
   left: 0;
 
   background-color: #00000050;
+}
+
+#expdiv{
+  z-index: 20;
+  position: fixed;
+  top: 80%;
+  transform: translateY(-80%);
+  float: left;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none
+}
+
+#XP {
+    text-align: center;
+    white-space: nowrap;
+    color: #94008b;
+    text-shadow:1px 1px 1px #000000;
+    font-size: 48px;
+    margin-top: 20px;
+
+    
+    animation:XP 5s;
+    -webkit-animation:XP 5s;
+    animation-fill-mode: forwards;
+
+    /* animation-delay:3s;
+    -webkit-animation-delay:3s; Safari and Chrome */
+    -webkit-animation-fill-mode: forwards;
+  
+}
+
+@keyframes XP{
+  0% {opacity: 0.2} 
+  6% {opacity: 1}
+  40% {opacity: 1}
+  100% {opacity:0.2}
+}
+
+@-webkit-keyframes XP{
+  0% {opacity: 0.2} 
+  6% {opacity: 1}
+  40% {opacity: 1}
+  100% {opacity:0.2}
 }
 
 /* Media Queries */
