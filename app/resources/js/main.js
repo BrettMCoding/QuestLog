@@ -1,8 +1,6 @@
 // TODO: subcategories?
-// TODO: login / save mechanism
-// TODO: random xp
-// TODO: Max-width option button?
-// TODO: Refactor duplicate button code
+// TODO: login / save mechanism?
+// TODO: Refactor/cleaning
 
 let data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')) : {
       todo: [],
@@ -30,6 +28,44 @@ function toggleAudio() {
     localStorage.setItem('audiocheckbox', false);
   }
 }
+
+document.getElementById('help').addEventListener('click', function() {
+    let body = document.getElementById("main");
+
+    let popUpBox = document.createElement('popupbox');
+    popUpBox.classList.add("popuphelp");
+
+    let helpText = document.createElement('div');
+    helpText.classList.add("helptext");
+
+    helpText.innerText = "Welcome to QuestLog! \na Warcraft themed to-do list\n\n Type in the \"Enter an activity\" box and press accept to add something to your to-do list.\n\n Press \"Complete\" to complete an item, and add it to the completed list. You can press \"Completed\" on a greyed out item to undo it's completion.\n\n Delete an item by pressing Abandon\n\n You can re-organize your list by dragging items with the \"⁞\" buttons\n\nYou can toggle the sound on or off by using the checkbox in the top left."
+
+
+    let bgBlock = document.createElement('bgBlock');
+    bgBlock.classList.add("bgBlock");
+
+    let x = document.createElement('button');
+    x.classList.add("x");
+
+    x.addEventListener('click', function e() {
+      $('.bgBlock').remove();
+      $('.popuphelp').remove();
+    
+      if (audioCheck.checked == true) {
+        audioClick.play();
+      }
+    });
+
+    popUpBox.appendChild(x);
+    popUpBox.appendChild(helpText);
+  
+    body.appendChild(popUpBox);
+    body.appendChild(bgBlock);
+  
+    if (audioCheck.checked == true) {
+      audioClick.play();
+    }
+});
 
 renderTodoList();
 
@@ -105,7 +141,7 @@ function abandonClicked() {
     buttons.classList.add('buttons');
 
     let popUpBox = document.createElement('popupbox');
-    popUpBox.classList.add("popup");
+    popUpBox.classList.add("popupconfirm");
 
     let bgBlock = document.createElement('bgBlock');
     bgBlock.classList.add("bgBlock");
@@ -123,7 +159,7 @@ function abandonClicked() {
 
       item.remove();
       $('.bgBlock').remove();
-      $('.popup').remove();
+      $('.popupconfirm').remove();
 
       dataObjectUpdated();
 
@@ -135,7 +171,7 @@ function abandonClicked() {
 
     no.addEventListener('click', function e() {
       $('.bgBlock').remove();
-      $('.popup').remove();
+      $('.popupconfirm').remove();
     
       if (audioCheck.checked == true) {
         audioClick.play();

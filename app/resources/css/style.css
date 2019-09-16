@@ -21,7 +21,7 @@ body, input, button {
 }
 
 header {
-  background:url('../assets/ironforge.jpg') no-repeat center/cover;
+  background:url('../assets/ironforge.jpg') no-repeat center/cover; /*img*/
   display: inline-flex;
   flex-direction: column;
   width:100%;
@@ -38,6 +38,7 @@ header {
 }
 
 header h1 {
+  position: relative;
   color:#e9c02c;
   text-align: center;
   text-shadow:2px 2px 1px #000000
@@ -100,7 +101,70 @@ header input::-webkit-input-placeholder {
   color:rgba(255,255,255,0.75);
 }
 
-header button {
+header button#help {
+  width:50px;
+  height:50px;
+  position:fixed;
+  top:9px;
+  right:53px;
+  cursor: pointer;
+
+  color: #ffc700;
+  background-color: rgba(8, 8, 8, 0.678);
+  border: rgb(248, 182, 0);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%;
+  box-shadow: 3px 3px 5px #000000;
+  text-align: center;
+  text-decoration: none;
+  font-size: 35px;
+  margin: 4px 2px;
+}
+
+.popuphelp{
+  z-index: 13;
+  width: 90%;
+  height: 90%;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  text-align: center;
+  color:#ffc700;
+  line-height:20px;
+  text-shadow:1px 1px 1px #000000;
+
+  background-color: #3c332f;
+  border-style: ridge;
+  border-width: 5px;
+  border-color: #757575;
+}
+
+.x {
+  z-index: 13;
+  top: -5px;
+  right: -5px;
+  width: 25px;
+  height: 26px;
+  position:fixed;
+  background-image: url('../assets/x.png');
+  background-repeat: no-repeat;
+  background-position: 0px center;
+  border: none;
+  background-color: rgba(255, 255, 255, 0)
+}
+
+.helptext {
+  height:95%;
+  width:95%;
+  position:fixed;
+  top:5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+header button#addItem {
   width:104px;
   height:26px;
   position:absolute;
@@ -290,7 +354,8 @@ ul.todo#completed:after {
   background-color: rgba(255, 255, 255, 0)
 }
 
-.popup{
+.popupconfirm{
+  z-index: 13;
   width: 500px;
   height: 100px;
   position:fixed; 
@@ -306,12 +371,11 @@ ul.todo#completed:after {
   border-style: ridge;
   border-width: 5px;
   border-color: #757575;
-
-  z-index: 13;
 }
 
 .bgBlock {
-  position: absolute;
+  z-index: 12;
+  position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
@@ -384,8 +448,14 @@ ul.todo#completed:after {
   ul.todo li .buttons button.complete:hover {
     background-image: url('../assets/complete_clicked.png');
   }
-  header button:hover {
+  header button#addItem:hover {
     background-image: url('../assets/accept_clicked.png');
+  }
+  header button#help:hover {
+    background-image: url('../assets/help_clicked.png');
+  }
+  .x:hover {
+    background-image: url('../assets/x_clicked.png');
   }
   ul.todo li .buttons button.remove:hover {
     background-image: url('../assets/abandon_clicked.png');
@@ -408,8 +478,14 @@ ul.todo#completed li .buttons button.complete:active {
 ul.todo li .buttons button.complete:active {
   background-image: url('../assets/complete_clicked.png');
 }
-header button:active {
+header button#addItem:active {
   background-image: url('../assets/accept_clicked.png');
+}
+header button#help:active {
+  background-image: url('../assets/help_clicked.png');
+}
+.x:active {
+  background-image: url('../assets/x_clicked.png');
 }
 ul.todo li .buttons button.remove:active {
   background-image: url('../assets/abandon_clicked.png');
